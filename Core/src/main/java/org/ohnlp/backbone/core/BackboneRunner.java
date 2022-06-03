@@ -8,6 +8,7 @@ import org.apache.beam.sdk.values.PDone;
 import org.apache.beam.sdk.values.Row;
 import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
+import org.ohnlp.backbone.core.coders.NoteNLPSchema;
 import org.ohnlp.backbone.core.coders.RowToByteArrCoder;
 import org.ohnlp.backbone.core.config.BackboneConfiguration;
 
@@ -31,6 +32,7 @@ public class BackboneRunner {
         for (Transform t : pipeline.transforms) {
             df = df.apply("Transform-Step-" + i++, t).setCoder(new RowToByteArrCoder());
         }
+        df.setRowSchema(NoteNLPSchema.getSchema());
         // - Load
         PDone complete = df.apply("Load-Step-" + i++, pipeline.load);
         p.run().waitUntilFinish();
