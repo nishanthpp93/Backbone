@@ -36,10 +36,10 @@ public class JSONLSingleLoad extends Load {
     @Override
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
         this.filenamePrefix = config.get("fileSystemPath").asText() + "/part-";
-        this.maxOutputPartitionMinutes = 60;
-        this.outputPartitionMinutesDelay = 15;
-        this.outputPartitionLateness = 5;
-        this.batchSize = 50000;
+        this.maxOutputPartitionMinutes = config.get("maxOutputPartitionMinutes").asInt();
+        this.outputPartitionMinutesDelay = this.maxOutputPartitionMinutes/4;
+        this.outputPartitionLateness = this.maxOutputPartitionMinutes/12;
+        this.batchSize = config.get("batchSize").asInt();
     }
 
     @Override
