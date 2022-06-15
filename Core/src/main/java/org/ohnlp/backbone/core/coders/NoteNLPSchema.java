@@ -9,7 +9,7 @@ public final class NoteNLPSchema {
 
     public static Schema getSchema() {
         List<Schema.Field> fields = new LinkedList<>();
-        fields.add(Schema.Field.of("note_id", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("note_id", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("section_concept_id", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
